@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    background: coral;
+    font-family: 'Open Sans', sans-serif;
+}
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 30rem);
+    gap: 2.5rem;
+    font-size: 2rem;
+}
+.wrapper > * {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    color: #525252;
+}
+ul {
+    list-style: none;
+}
+.notemaker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: coral;
+}
+.notemaker .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+    border: 2px dashed coral;
+    padding: 3rem;
+    height: 10rem;
+    width: 10rem;
+    border-radius: 50%;
+}
+.title {
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin: 1rem 0;
+    color: black;
+}
+.note {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.note-text {
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+.bottom-content {
+    padding-top: 2rem;
+    border-top: 1px solid #c8c8c8;
+    display: flex;
+    justify-content: space-between;
+}
