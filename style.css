@@ -44,7 +44,7 @@ ul {
 }
 .title {
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     margin: 1rem 0;
     color: black;
 }
@@ -63,4 +63,64 @@ ul {
     border-top: 1px solid #c8c8c8;
     display: flex;
     justify-content: space-between;
+}
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+}
+.note-header {
+    border-bottom: 1px solid #c8c8c8;
+    padding: 0rem 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.note-header p {
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+.note-header i {
+    font-size: 2rem;
+    color:#525252;
+}
+.note-template {
+    padding: 5rem;
+    padding-top: 2rem;
+}
+.note-areas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.note-areas label {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+.modal button {
+    display: block;
+    width: 100%;
+    padding: 1rem 0rem;
+    background: coral;
+    border: none;
+    font-size: 2rem;
+}
+.modal input, .modal textarea {
+    margin-bottom: 1.5rem;
+}
+#title {
+    font-size: 2rem;
+    padding: 1rem;
+    border: 1px solid black;
+}
+#note-box {
+    border: 1px solid black;
+    font-size: 1.8rem;
+}
+
+.hidden {
+    display: none;
 }
