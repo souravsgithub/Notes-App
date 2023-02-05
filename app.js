@@ -20,16 +20,22 @@ addBtn.addEventListener("click", () => {
         const year = date.getFullYear();
         const monthNumber = date.getMonth();
         let newEl = document.createElement("li");
-        newEl.innerHTML = `<p class="title">${title.value}</p>
-                <div class="note">
-                    <div class="note-text">${noteBox.value}</div>
-                    <div class="bottom-content">
-                        <span class="date">${day}th ${monthsArray[monthNumber]} ${year}</span>
-                        <div class="butons">
-                            <i class="fa-solid fa-ellipsis"></i>
-                        </div>
-                    </div>
-                </div>`;
+        newEl.classList.add("list-items");
+        newEl.innerHTML =
+            `
+            <div class="top-content">
+            <p class="title">${title.value}</p>
+            <div class="note">
+                <div class="note-text">${noteBox.value}</div>
+            </div>
+            </div>
+            <div class="bottom-content">
+                <span class="date">${day}th ${monthsArray[monthNumber]} ${year}</span>
+                <div class="butons">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+            </div>
+            `;
         ul.append(newEl);
         modalContainer.classList.add("hidden");
         title.value = "";

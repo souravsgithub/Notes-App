@@ -55,12 +55,12 @@ ul {
     margin: 1rem 0;
     color: black;
 }
-.note {
-    height: 80%;
+.list-items {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
 .note-text {
     margin-bottom: 2rem;
     font-size: 1.8rem;
