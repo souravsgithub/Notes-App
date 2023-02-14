@@ -7,46 +7,15 @@ const noteBox = document.querySelector("#note-box");
 const ul = document.querySelector(".wrapper");
 const date = new Date();
 const monthsArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+let changeItem;
+let isUpdating = false;
 notemaker.addEventListener("click", (event) => {
     modalContainer.classList.remove("hidden");
+    isUpdating = false;
 });
 modalContainer.addEventListener("click", (event) => {
     if (event.target.id === "cross-icon" || event.target.classList.contains("modal-container")) {
         modalContainer.classList.add("hidden");
-    }
-});
-addBtn.addEventListener("click", (event) => {
-    console.log(event);
-    if (title.value && noteBox.value) {
-        const day = date.getDate();
-        const year = date.getFullYear();
-        const monthNumber = date.getMonth();
-        let newEl = document.createElement("li");
-        newEl.classList.add("list-items");
-        newEl.innerHTML =
-            `
-            <div class="top-content">
-                <p class="title">${title.value}</p>
-                <div class="note">
-                    <div class="note-text">${noteBox.value}</div>
-                </div>
-            </div>
-            <div class="bottom-content">
-                <span class="date">${day}th ${monthsArray[monthNumber]} ${year}</span>
-                <div class="buttons">
-                    <i class="fa-solid fa-ellipsis dots"></i>
-                    <div class="small-modal hidden">
-                        <a href="" class="edit">Edit</a>
-                        <a href="" class="delete">Delete</a>
-                    </div>
-                </div>
-            </div>
-            `;
-        ul.append(newEl);
-        modalContainer.classList.add("hidden");
-        title.value = "";
-        noteBox.value = "";
-        addBtn.innerText = "Add Note";
     }
 });
 
@@ -65,6 +34,48 @@ document.addEventListener("click", (event) => {
         title.value = oldTitle;
         noteBox.value = oldParagraph;
         addBtn.innerText = "Edit Note";
-        event.target.closest(".list-items").remove();
+        isUpdating = true;
+        changeItem = event.target.closest(".list-items");
+    }
+    if (event.target.classList.contains("add-btn")) {
+        if (title.value && noteBox.value && !isUpdating) {
+            const day = date.getDate();
+            const year = date.getFullYear();
+            const monthNumber = date.getMonth();
+            let newEl = document.createElement("li");
+            newEl.classList.add("list-items");
+            newEl.innerHTML =
+                `
+                <div class="top-content">
+                    <p class="title">${title.value}</p>
+                    <div class="note">
+                        <div class="note-text">${noteBox.value}</div>
+                    </div>
+                </div>
+                <div class="bottom-content">
+                    <span class="date">${day}th ${monthsArray[monthNumber]} ${year}</span>
+                    <div class="buttons">
+                        <i class="fa-solid fa-ellipsis dots"></i>
+                        <div class="small-modal hidden">
+                            <a href="" class="edit">Edit</a>
+                            <a href="" class="delete">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                `;
+            ul.append(newEl);
+            modalContainer.classList.add("hidden");
+            title.value = "";
+            noteBox.value = "";
+            addBtn.innerText = "Add Note";
+        } else if (title.value && noteBox.value && isUpdating) {
+            changeItem.children[0].children[0].innerText = title.value;
+            changeItem.children[0].children[1].children[0].innerText = noteBox.value;
+            modalContainer.classList.add("hidden");
+            changeItem.children[1].children[1].children[1].classList.toggle("hidden");
+            title.value = "";
+            noteBox.value = "";
+            addBtn.innerText = "Add Note";
+        }
     }
 });
