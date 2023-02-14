@@ -46,6 +46,7 @@ addBtn.addEventListener("click", (event) => {
         modalContainer.classList.add("hidden");
         title.value = "";
         noteBox.value = "";
+        addBtn.innerText = "Add Note";
     }
 });
 
@@ -63,6 +64,7 @@ document.addEventListener("click", (event) => {
         modalContainer.classList.remove("hidden");
         title.value = oldTitle;
         noteBox.value = oldParagraph;
+        addBtn.innerText = "Edit Note";
         event.target.closest(".list-items").remove();
     }
 });
