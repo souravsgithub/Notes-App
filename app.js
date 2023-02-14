@@ -31,7 +31,11 @@ addBtn.addEventListener("click", () => {
             </div>
             <div class="bottom-content">
                 <span class="date">${day}th ${monthsArray[monthNumber]} ${year}</span>
-                <div class="butons">
+                <div class="buttons">
+                    <div class="small-modal hidden">
+                        <a href="" class="edit">Edit</a>
+                        <a href="" class="delete">Delete</a>
+                    </div>
                     <i class="fa-solid fa-ellipsis"></i>
                 </div>
             </div>
