@@ -9,10 +9,12 @@ const date = new Date();
 const monthsArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 let changeItem;
 let isUpdating = false;
+
 notemaker.addEventListener("click", (event) => {
     modalContainer.classList.remove("hidden");
     isUpdating = false;
 });
+
 modalContainer.addEventListener("click", (event) => {
     if (event.target.id === "cross-icon" || event.target.classList.contains("modal-container")) {
         modalContainer.classList.add("hidden");
@@ -21,10 +23,19 @@ modalContainer.addEventListener("click", (event) => {
 
 document.addEventListener("click", (event) => {
     event.preventDefault();
-    everyAction(event);
+    clickFeatures(event);
+    if (event.target.classList.contains("add-btn")) {
+        addBtnFunctionality();
+    }
 });
 
-function everyAction(event) {
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        addBtnFunctionality();
+    }
+});
+
+function clickFeatures(event) {
     if (event.target.classList.contains("dots")) {
         event.target.nextElementSibling.classList.toggle("hidden");
     }
@@ -41,15 +52,17 @@ function everyAction(event) {
         isUpdating = true;
         changeItem = event.target.closest(".list-items");
     }
-    if (event.target.classList.contains("add-btn")) {
-        if (title.value && noteBox.value && !isUpdating) {
-            const day = date.getDate();
-            const year = date.getFullYear();
-            const monthNumber = date.getMonth();
-            let newEl = document.createElement("li");
-            newEl.classList.add("list-items");
-            newEl.innerHTML =
-                `
+}
+
+function addBtnFunctionality() {
+    if (title.value && noteBox.value && !isUpdating) {
+        const day = date.getDate();
+        const year = date.getFullYear();
+        const monthNumber = date.getMonth();
+        let newEl = document.createElement("li");
+        newEl.classList.add("list-items");
+        newEl.innerHTML =
+            `
                 <div class="top-content">
                     <p class="title">${title.value}</p>
                     <div class="note">
@@ -67,20 +80,18 @@ function everyAction(event) {
                     </div>
                 </div>
                 `;
-            ul.append(newEl);
-            modalContainer.classList.add("hidden");
-            title.value = "";
-            noteBox.value = "";
-            addBtn.innerText = "Add Note";
-        } else if (title.value && noteBox.value && isUpdating) {
-            changeItem.children[0].children[0].innerText = title.value;
-            changeItem.children[0].children[1].children[0].innerText = noteBox.value;
-            modalContainer.classList.add("hidden");
-            changeItem.children[1].children[1].children[1].classList.toggle("hidden");
-            title.value = "";
-            noteBox.value = "";
-            addBtn.innerText = "Add Note";
-        }
+        ul.append(newEl);
+        modalContainer.classList.add("hidden");
+        title.value = "";
+        noteBox.value = "";
+        addBtn.innerText = "Add Note";
+    } else if (title.value && noteBox.value && isUpdating) {
+        changeItem.children[0].children[0].innerText = title.value;
+        changeItem.children[0].children[1].children[0].innerText = noteBox.value;
+        modalContainer.classList.add("hidden");
+        changeItem.children[1].children[1].children[1].classList.toggle("hidden");
+        title.value = "";
+        noteBox.value = "";
+        addBtn.innerText = "Add Note";
     }
-
 }
