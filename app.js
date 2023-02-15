@@ -21,6 +21,10 @@ modalContainer.addEventListener("click", (event) => {
 
 document.addEventListener("click", (event) => {
     event.preventDefault();
+    everyAction(event);
+});
+
+function everyAction(event) {
     if (event.target.classList.contains("dots")) {
         event.target.nextElementSibling.classList.toggle("hidden");
     }
@@ -78,4 +82,5 @@ document.addEventListener("click", (event) => {
             addBtn.innerText = "Add Note";
         }
     }
-});
+
+}
