@@ -191,3 +191,9 @@ ul {
     left: 0;
     z-index: 1;
 }
+
+@media screen and (max-width: 500px) {
+    .modal {
+        max-width: 90%;
+    }
+}
