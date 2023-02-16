@@ -1,3 +1,5 @@
+
+// references to the dom elements
 const notemaker = document.querySelector(".notemaker");
 const smallModal = document.querySelector(".small-modal");
 const addBtn = document.querySelector(".add-btn");
@@ -10,17 +12,20 @@ const monthsArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Se
 let changeItem;
 let isUpdating = false;
 
+// opens up the modal to create a new note
 notemaker.addEventListener("click", (event) => {
     modalContainer.classList.remove("hidden");
     isUpdating = false;
 });
 
+// closes the modal when clicked on the cross icon or outside area of the modal
 modalContainer.addEventListener("click", (event) => {
     if (event.target.id === "cross-icon" || event.target.classList.contains("modal-container")) {
         modalContainer.classList.add("hidden");
     }
 });
 
+// listens to the click event and calls the clickFeatures function to do things based on certain conditions
 document.addEventListener("click", (event) => {
     event.preventDefault();
     clickFeatures(event);
@@ -29,12 +34,14 @@ document.addEventListener("click", (event) => {
     }
 });
 
+// things to do when the Enter button is pressed
 document.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         addBtnFunctionality();
     }
 });
 
+// does things based on what the user has clicked on 
 function clickFeatures(event) {
     if (event.target.classList.contains("dots")) {
         event.target.nextElementSibling.classList.toggle("hidden");
@@ -55,14 +62,25 @@ function clickFeatures(event) {
 }
 
 function addBtnFunctionality() {
+    // if this condition is true then call createNote function
     if (title.value && noteBox.value && !isUpdating) {
-        const day = date.getDate();
-        const year = date.getFullYear();
-        const monthNumber = date.getMonth();
-        let newEl = document.createElement("li");
-        newEl.classList.add("list-items");
-        newEl.innerHTML =
-            `
+        createNote();
+    }
+    // else if this condition is true then call the updateNote function
+    else if (title.value && noteBox.value && isUpdating) {
+        updateNote();
+    }
+}
+
+// function to create a new note
+function createNote() {
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const monthNumber = date.getMonth();
+    let newEl = document.createElement("li");
+    newEl.classList.add("list-items");
+    newEl.innerHTML =
+        `
                 <div class="top-content">
                     <p class="title">${title.value}</p>
                     <div class="note">
@@ -80,18 +98,20 @@ function addBtnFunctionality() {
                     </div>
                 </div>
                 `;
-        ul.append(newEl);
-        modalContainer.classList.add("hidden");
-        title.value = "";
-        noteBox.value = "";
-        addBtn.innerText = "Add Note";
-    } else if (title.value && noteBox.value && isUpdating) {
-        changeItem.children[0].children[0].innerText = title.value;
-        changeItem.children[0].children[1].children[0].innerText = noteBox.value;
-        modalContainer.classList.add("hidden");
-        changeItem.children[1].children[1].children[1].classList.toggle("hidden");
-        title.value = "";
-        noteBox.value = "";
-        addBtn.innerText = "Add Note";
-    }
+    ul.append(newEl);
+    modalContainer.classList.add("hidden");
+    title.value = "";
+    noteBox.value = "";
+    addBtn.innerText = "Add Note";
+}
+
+// function to update an existing note
+function updateNote() {
+    changeItem.children[0].children[0].innerText = title.value;
+    changeItem.children[0].children[1].children[0].innerText = noteBox.value;
+    modalContainer.classList.add("hidden");
+    changeItem.children[1].children[1].children[1].classList.toggle("hidden");
+    title.value = "";
+    noteBox.value = "";
+    addBtn.innerText = "Add Note";
 }
