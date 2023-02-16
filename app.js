@@ -1,7 +1,6 @@
 
 // references to the dom elements
 const notemaker = document.querySelector(".notemaker");
-const smallModal = document.querySelector(".small-modal");
 const addBtn = document.querySelector(".add-btn");
 const modalContainer = document.querySelector(".modal-container");
 const title = document.querySelector("#title");
@@ -43,7 +42,7 @@ document.addEventListener("keydown", (event) => {
 
 // does things based on what the user has clicked on 
 function clickFeatures(event) {
-    // opens up the modal for delete or edit
+    // opens up or closes the modal for delete or edit
     if (event.target.classList.contains("dots")) {
         event.target.nextElementSibling.classList.toggle("hidden");
     }
