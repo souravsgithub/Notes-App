@@ -34,7 +34,7 @@ document.addEventListener("click", (event) => {
     }
 });
 
-// things to do when the Enter button is pressed
+// call the addBtnFunctionality function to add or update a note when the Enter button is clicked
 document.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         addBtnFunctionality();
@@ -43,12 +43,15 @@ document.addEventListener("keydown", (event) => {
 
 // does things based on what the user has clicked on 
 function clickFeatures(event) {
+    // opens up the modal for delete or edit
     if (event.target.classList.contains("dots")) {
         event.target.nextElementSibling.classList.toggle("hidden");
     }
+    // deletes the note
     if (event.target.classList.contains("delete")) {
         event.target.closest(".list-items").remove();
     }
+    // opens up the modal to edit an existing note
     if (event.target.classList.contains("edit")) {
         let oldTitle = event.target.closest(".bottom-content").previousElementSibling.children[0].innerText;
         let oldParagraph = event.target.closest(".bottom-content").previousElementSibling.children[1].innerText;
