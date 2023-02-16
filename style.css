@@ -167,6 +167,11 @@ ul {
     margin-bottom: 1.5rem;
 }
 
+.title,
+.note-text {
+    overflow-wrap: break-word;
+}
+
 #title {
     font-size: 2rem;
     padding: 1rem;
