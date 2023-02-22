@@ -9,6 +9,7 @@ const ul = document.querySelector(".wrapper");
 const date = new Date();
 const monthsArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 let changeItem;
+let updateId;
 let isUpdating = false;
 let notes = JSON.parse(localStorage.getItem("notes") || "[]");
 
@@ -98,6 +99,10 @@ function createNote() {
 function updateNote() {
     changeItem.children[0].children[0].innerText = title.value;
     changeItem.children[0].children[1].children[0].innerText = noteBox.value;
+    console.log(updateId);
+    notes[updateId].title = title.value;
+    notes[updateId].description = noteBox.value;
+    localStorage.setItem("notes", JSON.stringify(notes));
     modalContainer.classList.add("hidden");
     changeItem.children[1].children[1].children[1].classList.toggle("hidden");
     title.value = "";
@@ -124,7 +129,7 @@ function showNotes() {
                     <div class="buttons">
                         <i class="fa-solid fa-ellipsis dots"></i>
                         <div class="small-modal hidden">
-                            <a href="" class="edit">Edit</a>
+                            <a href="" class="edit" onClick="getNoteId(${index})">Edit</a>
                             <a href="" class="delete" onClick="deleteNote(${index})">Delete</a>
                         </div>
                     </div>
@@ -144,3 +149,6 @@ function deleteNote(noteId) {
     showNotes();
 }
 
+function getNoteId(noteId) {
+    updateId = noteId;
+}
