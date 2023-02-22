@@ -10,6 +10,7 @@ const date = new Date();
 const monthsArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 let changeItem;
 let isUpdating = false;
+let notes = JSON.parse(localStorage.getItem("notes") || "[]");
 
 // opens up the modal to create a new note
 notemaker.addEventListener("click", (event) => {
@@ -78,30 +79,16 @@ function addBtnFunctionality() {
 function createNote() {
     const day = date.getDate();
     const year = date.getFullYear();
-    const monthNumber = date.getMonth();
-    let newEl = document.createElement("li");
-    newEl.classList.add("list-items");
-    newEl.innerHTML =
-        `
-                <div class="top-content">
-                    <p class="title">${title.value}</p>
-                    <div class="note">
-                        <div class="note-text">${noteBox.value}</div>
-                    </div>
-                </div>
-                <div class="bottom-content">
-                    <span class="date">${day}th ${monthsArray[monthNumber]} ${year}</span>
-                    <div class="buttons">
-                        <i class="fa-solid fa-ellipsis dots"></i>
-                        <div class="small-modal hidden">
-                            <a href="" class="edit">Edit</a>
-                            <a href="" class="delete">Delete</a>
-                        </div>
-                    </div>
-                </div>
-                `;
-    ul.append(newEl);
+    const month = monthsArray[date.getMonth()];
+    const noteObj = {
+        title: title.value,
+        description: noteBox.value,
+        date: `${day} ${month} ${year}`
+    };
+    notes.push(noteObj);
+    showNotes();
     modalContainer.classList.add("hidden");
+    localStorage.setItem("notes", JSON.stringify(notes));
     title.value = "";
     noteBox.value = "";
     addBtn.innerText = "Add Note";
@@ -117,3 +104,43 @@ function updateNote() {
     noteBox.value = "";
     addBtn.innerText = "Add Note";
 }
+
+// shows the notes 
+function showNotes() {
+    localStorage.setItem("notes", JSON.stringify(notes));
+    document.querySelectorAll(".list-items").forEach((note) => note.remove());
+    notes.forEach((note, index) => {
+        let liTag = document.createElement("li");
+        liTag.classList.add("list-items");
+        liTag.innerHTML = `
+                <div class="top-content">
+                    <p class="title">${note.title}</p>
+                    <div class="note">
+                        <div class="note-text">${note.description}</div>
+                    </div>
+                </div>
+                <div class="bottom-content">
+                    <span class="date">${note.date}</span>
+                    <div class="buttons">
+                        <i class="fa-solid fa-ellipsis dots"></i>
+                        <div class="small-modal hidden">
+                            <a href="" class="edit">Edit</a>
+                            <a href="" class="delete" onClick="deleteNote(${index})">Delete</a>
+                        </div>
+                    </div>
+                </div>
+        `;
+        ul.append(liTag);
+    });
+}
+
+// shows the notes on page load
+showNotes();
+
+// function to delete a note from the localStorage 
+function deleteNote(noteId) {
+    console.log(noteId);
+    notes.splice(noteId, 1);
+    showNotes();
+}
+
