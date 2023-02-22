@@ -196,8 +196,13 @@ ul {
     z-index: 1;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 450px) {
     .modal {
         max-width: 90%;
     }
+
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+
 }
