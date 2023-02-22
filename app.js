@@ -1,6 +1,7 @@
 
 // references to the dom elements
 const notemaker = document.querySelector(".notemaker");
+const modalHeading = document.querySelector(".modal-heading");
 const addBtn = document.querySelector(".add-btn");
 const modalContainer = document.querySelector(".modal-container");
 const title = document.querySelector("#title");
@@ -23,6 +24,10 @@ notemaker.addEventListener("click", (event) => {
 modalContainer.addEventListener("click", (event) => {
     if (event.target.id === "cross-icon" || event.target.classList.contains("modal-container")) {
         modalContainer.classList.add("hidden");
+        title.value = "";
+        noteBox.value = "";
+        addBtn.innerText = "Add Note";
+        modalHeading.innerText = "Add a new Note";
     }
 });
 
@@ -60,6 +65,7 @@ function clickFeatures(event) {
         title.value = oldTitle;
         noteBox.value = oldParagraph;
         addBtn.innerText = "Edit Note";
+        modalHeading.innerText = "Update the Note";
         isUpdating = true;
         changeItem = event.target.closest(".list-items");
     }
@@ -93,6 +99,7 @@ function createNote() {
     title.value = "";
     noteBox.value = "";
     addBtn.innerText = "Add Note";
+    modalHeading.innerText = "Add a new Note";
 }
 
 // function to update an existing note
@@ -107,6 +114,7 @@ function updateNote() {
     title.value = "";
     noteBox.value = "";
     addBtn.innerText = "Add Note";
+    modalHeading.innerText = "Create a new Note";
 }
 
 // shows the notes 
