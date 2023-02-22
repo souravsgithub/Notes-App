@@ -99,7 +99,6 @@ function createNote() {
 function updateNote() {
     changeItem.children[0].children[0].innerText = title.value;
     changeItem.children[0].children[1].children[0].innerText = noteBox.value;
-    console.log(updateId);
     notes[updateId].title = title.value;
     notes[updateId].description = noteBox.value;
     localStorage.setItem("notes", JSON.stringify(notes));
