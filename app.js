@@ -24,10 +24,7 @@ notemaker.addEventListener("click", (event) => {
 modalContainer.addEventListener("click", (event) => {
     if (event.target.id === "cross-icon" || event.target.classList.contains("modal-container")) {
         modalContainer.classList.add("hidden");
-        title.value = "";
-        noteBox.value = "";
-        addBtn.innerText = "Add Note";
-        modalHeading.innerText = "Add a new Note";
+        defaultSettings();
     }
 });
 
@@ -96,13 +93,10 @@ function createNote() {
     showNotes();
     modalContainer.classList.add("hidden");
     localStorage.setItem("notes", JSON.stringify(notes));
-    title.value = "";
-    noteBox.value = "";
-    addBtn.innerText = "Add Note";
-    modalHeading.innerText = "Add a new Note";
+    defaultSettings();
 }
 
-// function to update an existing note
+// function to update an existing note both on the dom as well as in the localStorage
 function updateNote() {
     changeItem.children[0].children[0].innerText = title.value;
     changeItem.children[0].children[1].children[0].innerText = noteBox.value;
@@ -111,10 +105,7 @@ function updateNote() {
     localStorage.setItem("notes", JSON.stringify(notes));
     modalContainer.classList.add("hidden");
     changeItem.children[1].children[1].children[1].classList.toggle("hidden");
-    title.value = "";
-    noteBox.value = "";
-    addBtn.innerText = "Add Note";
-    modalHeading.innerText = "Create a new Note";
+    defaultSettings();
 }
 
 // shows the notes 
@@ -156,6 +147,15 @@ function deleteNote(noteId) {
     showNotes();
 }
 
+// function to get which note the user clicked on and get the index of that obj in the array stored in localStorage
 function getNoteId(noteId) {
     updateId = noteId;
+}
+
+// function to get back to default settings for the modal
+function defaultSettings() {
+    title.value = "";
+    noteBox.value = "";
+    addBtn.innerText = "Add Note";
+    modalHeading.innerText = "Add a new Note";
 }
