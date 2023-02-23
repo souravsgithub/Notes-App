@@ -48,6 +48,11 @@ document.addEventListener("keydown", (event) => {
 function clickFeatures(event) {
     // opens up or closes the modal for delete or edit
     if (event.target.classList.contains("dots")) {
+        document.querySelectorAll(".small-modal").forEach((modal) => {
+            if (event.target.nextElementSibling !== modal) {
+                modal.classList.add("hidden");
+            }
+        });
         event.target.nextElementSibling.classList.toggle("hidden");
     }
     // deletes the note
@@ -142,7 +147,6 @@ showNotes();
 
 // function to delete a note from the localStorage 
 function deleteNote(noteId) {
-    console.log(noteId);
     notes.splice(noteId, 1);
     showNotes();
 }
